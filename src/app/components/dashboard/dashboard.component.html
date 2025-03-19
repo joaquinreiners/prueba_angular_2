@@ -1,0 +1,71 @@
+<mat-toolbar color="primary" class="d-flex justify-content-between sticky-top">
+  <span>Products List</span>
+  <button type="button" class="btn btn-danger ml-auto"  (click)="logout()">logout</button>
+</mat-toolbar>
+<ng-template #productModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">{{ selectedProduct?.title }}</h4>
+  </div>
+  <div class="modal-body">
+    <img [src]="selectedProduct?.image" alt="Producto" class="img-fluid d-block mx-auto" />
+    <p class="text-center m-1">{{ selectedProduct?.category }}</p>
+    <p>{{ selectedProduct?.description }}</p>
+    <p><strong>Price:</strong> {{ selectedProduct?.price | currency }}</p>
+  </div>
+  
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.close()">Close</button>
+  </div>
+</ng-template>
+<div class="dashboard col-10 mx-auto p-3">
+  <div class="filters">
+    <mat-form-field appearance="outline">
+      <mat-label>Filter by category</mat-label>
+      <mat-select [(ngModel)]="selectedCategory" (selectionChange)="onCategoryChange()">
+        <mat-option value="">all</mat-option>
+        <mat-option *ngFor="let category of categories" [value]="category">{{ category }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Products to show</mat-label>
+      <mat-select [(ngModel)]="limit" (selectionChange)="onLimitChange()">
+        <mat-option *ngFor="let num of [5, 10, 15, 20]" [value]="num">{{ num }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <table mat-table [dataSource]="filteredProducts.slice(0, limit)" class="mat-elevation-z8">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef >ID</th>
+      <td mat-cell *matCellDef="let product">{{ product.id }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef>Title</th>
+      <td mat-cell *matCellDef="let product">{{ product.title }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="category">
+      <th mat-header-cell *matHeaderCellDef>Category</th>
+      <td mat-cell *matCellDef="let product">{{ product.category }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef>Price</th>
+      <td mat-cell *matCellDef="let product">{{ product.price | currency }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let product">
+        <button mat-button color="primary" (click)="openProductModal(product, productModal)">Open</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+
+

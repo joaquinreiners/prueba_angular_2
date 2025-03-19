@@ -1,0 +1,60 @@
+.dashboard {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+}
+
+.filters {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+mat-form-field {
+  width: 45%;
+}
+
+table {
+  width: 100%;
+}
+
+th {
+  font-weight: bold;
+}
+
+td, th {
+  padding: 12px;
+  text-align: left;
+}
+
+
+button {
+  cursor: pointer;
+}
+
+
+.modal-dialog {
+  width: 500px;
+}
+.modal-content {
+  width: 100%;
+  max-width: 800px; /* Ajusta el tamaño si es necesario */
+  margin: 0 auto;
+}
+
+.modal-header, .modal-body, .modal-footer {
+  padding: 20px;
+}
+
+.modal-body img {
+  max-height: 250px;
+  max-width: 100%;
+  height: auto;
+}
+
+.modal-backdrop {
+  z-index: 1050 !important; /* Asegura que el backdrop esté por encima de otros elementos */
+}

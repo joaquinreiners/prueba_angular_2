@@ -1,0 +1,10 @@
+<div class="login-container">
+  <img [src]="imageSrc" alt="Login" class="login-image" />
+  <form (ngSubmit)="login()">
+    <input type="email" [(ngModel)]="email" name="email" placeholder="Correo" required />
+    <input type="password" [(ngModel)]="password" name="password" placeholder="Contraseña" required />
+    <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+    <button type="submit">Login</button>
+  </form>
+  <p>user: {{user.email}} pass: {{user.password}}</p>
+</div>
